@@ -95,9 +95,7 @@ public class ExcelUtil {
     }
 
     /**
-     * 返回sheet表数目
-     *
-     * @return int
+     * sheet表数目
      */
     public int getSheetCount() {
         int sheetCount = -1;
@@ -107,8 +105,6 @@ public class ExcelUtil {
 
     /**
      * sheetNum下的记录行数
-     *
-     * @return int
      */
     public int getRowCount() {
         int rowCount = -1;
@@ -123,9 +119,17 @@ public class ExcelUtil {
     }
 
     /**
-     * sheetNum下的记录行数
-     *
-     * @return int
+     * 读取指定sheetNum的记录行数
+     */
+    public int getRowCount(int sheetNum) {
+        Sheet sheet = workbookRead.getSheetAt(sheetNum);
+        int rowCount = -1;
+        rowCount = sheet.getLastRowNum();
+        return rowCount;
+    }
+
+    /**
+     * 某行的记录列数
      */
     public int getCellCount(int row) {
         int celCount = -1;
@@ -138,35 +142,16 @@ public class ExcelUtil {
         return celCount;
     }
 
-    /**
-     * 读取指定sheetNum的rowCount
-     *
-     * @param sheetNum
-     * @return int
-     */
-    public int getRowCount(int sheetNum) {
-        Sheet sheet = workbookRead.getSheetAt(sheetNum);
-        int rowCount = -1;
-        rowCount = sheet.getLastRowNum();
-        return rowCount;
-    }
 
     /**
      * 得到指定行的内容
-     *
-     * @param lineNum
-     * @return String[]
      */
     public String[] readExcelLine(int lineNum) {
         return readExcelLine(this.sheetNum, lineNum);
     }
 
     /**
-     * 指定工作表和行数的内容
-     *
-     * @param sheetNum
-     * @param lineNum
-     * @return String[]
+     * 指定工作表和指定行的内容
      */
     public String[] readExcelLine(int sheetNum, int lineNum) {
         if (sheetNum < 0 || lineNum < 0)
@@ -189,9 +174,6 @@ public class ExcelUtil {
 
     /**
      * 读取某一行中指定列的内容
-     *
-     * @param cellNum
-     * @return String
      */
     public String readStringExcelCell(int cellNum) {
         return readStringExcelCell(this.rowNum, cellNum);
@@ -199,11 +181,7 @@ public class ExcelUtil {
 
 
     /**
-     * 指定行和列编号的内容
-     *
-     * @param rowNum
-     * @param cellNum
-     * @return String
+     * 指定行和指定列的内容
      */
     public String readStringExcelCell(int rowNum, int cellNum) {
         return readStringExcelCell(this.sheetNum, rowNum, cellNum);
@@ -211,11 +189,6 @@ public class ExcelUtil {
 
     /**
      * 指定工作表、行、列下的内容
-     *
-     * @param sheetNum
-     * @param rowNum
-     * @param cellNum
-     * @return String
      */
     public String readStringExcelCell(int sheetNum, int rowNum, int cellNum) {
         if (sheetNum < 0 || rowNum < 0)
@@ -261,8 +234,6 @@ public class ExcelUtil {
 
     /**
      * 导出Excel文件
-     *
-     * @throws Exception
      */
     public void export() throws Exception {
         try {
@@ -282,7 +253,6 @@ public class ExcelUtil {
 
     /**
      * 增加一行
-     *
      * @param index 行号
      */
     public void createRow(int index) {
@@ -291,7 +261,6 @@ public class ExcelUtil {
 
     /**
      * 获取单元格的值
-     *
      * @param index 列号
      */
     public String getCell(int index) {
@@ -323,7 +292,6 @@ public class ExcelUtil {
 
     /**
      * 设置单元格
-     *
      * @param index 列号
      * @param value 单元格填充值
      */
@@ -357,8 +325,6 @@ public class ExcelUtil {
      */
     public void setCell(int index, String value) {
         Cell cell = this.row.createCell((short) index);
-        //cell.setCellType(Cell.CELL_TYPE_STRING);
-        //cell.setEncoding(XLS_ENCODING);
         cell.setCellValue(value);
     }
 
